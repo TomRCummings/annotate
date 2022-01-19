@@ -14,7 +14,6 @@ async function addCollectionRoutes(router, db) {
         await cursor.forEach(function(doc) {
             collectionArray.push(doc);
         });
-        // await cursor.forEach(console.dir);
         res.send(collectionArray);
     });
 
@@ -24,7 +23,6 @@ async function addCollectionRoutes(router, db) {
         const idToGet = new mongo.ObjectId(req.params.id);
         const query = { _id: idToGet };
         const collection = await collectionTable.findOne(query);
-        console.log(Object.keys(collection));
         res.send(collection);
     });
 
@@ -32,7 +30,6 @@ async function addCollectionRoutes(router, db) {
     router.post("/collection", async function(req, res) {
         const collectionTable = db.collection("collections");
         const newCollection = { collection_name: req.body.collection_name, collection_description: req.body.collection_description, object_schema: req.body.object_schema, label_schema: req.body.label_schema };
-        console.log(newCollection);
         const result = await collectionTable.insertOne(newCollection);
         res.send(result);
     });

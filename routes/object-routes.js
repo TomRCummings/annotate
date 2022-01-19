@@ -34,7 +34,6 @@ async function addObjectRoutes(router, db) {
         const objectTable = db.collection("objects");
         const collectionID = new mongo.ObjectId(req.body.collection_id);
         const newObject = { collection_id: collectionID, object: req.body.object };
-        console.log(newObject);
         const result = await objectTable.insertOne(newObject);
         res.send(result);
     });
